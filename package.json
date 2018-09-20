@@ -1,7 +1,7 @@
 {
   "name": "react-incision",
   "version": "0.0.1",
-  "description": "",
+  "description": "Slice & dice subtree state in React",
   "main": "dist/react-incision.js",
   "module": "dist/react-incision.esm.js",
   "license": "MIT",
@@ -9,8 +9,9 @@
     "Sebastian De Deyne <sebastiandedeyne@gmail.com>"
   ],
   "scripts": {
-    "build": "rollup -c",
     "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "test": "jest",
     "prepublish": "npm run build",
     "format": "prettier --write '**/*.js'",
     "size-limit": "size-limit"
