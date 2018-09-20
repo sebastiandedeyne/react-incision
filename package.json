@@ -1,5 +1,10 @@
 {
-  "private": true,
+  "name": "react-incision",
+  "version": "0.0.1",
+  "license": "MIT",
+  "authors": [
+    "Sebastian De Deyne <sebastiandedeyne@gmail.com>"
+  ],
   "scripts": {
     "format": "prettier --write '**/*.js'"
   },
