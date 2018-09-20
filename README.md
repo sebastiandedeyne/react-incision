@@ -3,9 +3,11 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Latest Version on NPM](https://img.shields.io/npm/v/react-incision.svg?style=flat-square)](https://npmjs.com/package/react-incision)
 
-React Incision is a small state management library built on [React 16's context API](https://reactjs.org/docs/context.html). It allows you to expose a state object, and retrieve and update it further down the component tree. You can retrieve parent state via dot notation, or "slice" the parent state in a child component to expose a new, smaller state object. This all sounds quite abstract, time for a few examples!
+React Incision is a small state management library built on [React 16's context API](https://reactjs.org/docs/context.html). It allows you to expose a state object, and retrieve or update it further down the component tree.
 
-First, we create a component that will keep some state. The goal is to share this state with it's child components.
+Retrieve parent state via dot notation, or "slice" the parent state in a child component to expose a new, smaller state object. This probably sounds quite abstract, time for a few examples!
+
+First, we'll create a stateful component. The goal is to share state with it's child components.
 
 ```js
 import React from "react";
@@ -25,7 +27,7 @@ class Profile extends React.Component {
 }
 ```
 
-Next, we'll render an `Incision` component, pass our component state, and register an `onChange` handler so Incision can modify our state for us.
+Next, we'll render an `Incision` component, pass our component state, and register an `onChange` handler so Incision can modify our state.
 
 ```js
 class Profile extends React.Component {
@@ -53,7 +55,7 @@ class Profile extends React.Component {
 }
 ```
 
-In the `UserForm` component we rendered above, we can "operate" on the parent state via a path. The `Incision.Operate` component accepts a function as it's child. The function is invoked with two arguments: the value and a setter. We can use these to map the `name` property to an input.
+In the `UserForm` component we rendered above, we can "operate" on the parent state by specifying a path. The `Incision.Operate` component accepts a function as it's child. The function is invoked with two arguments: the value and a setter. We can use these to map the `name` property to an input.
 
 ```js
 class UserForm extends React.Component {
@@ -120,15 +122,17 @@ class UserForm extends React.Component {
 
 ## Who's this for?
 
-Incise isn't meant to be the main state management library in your application, but is great to augment existing solutions in specific parts of your app.
+Incise isn't meant to be the main state management library in your application, but is great to augment existing solutions in select parts of your app.
 
-Other solutions (like [Redux](https://github.com/reduxjs/redux), [MobX](https://github.com/mobxjs/mobx), or [Unstated](https://github.com/jamiebuilds/unstated)) are better solutions for your main application logic, because the encapsulate behaviour in "actions" of some sort. Incise is great to reduce boilerplate in places where you don't want or need actions for every single state change.
+Other libraries (like [Redux](https://github.com/reduxjs/redux), [MobX](https://github.com/mobxjs/mobx), or [Unstated](https://github.com/jamiebuilds/unstated)) are better solutions to deal with your main application logic, because they encapsulate behavior in "actions" or similar concepts. Incise is great to reduce boilerplate in places where you don't want or need actions for every single state change, but just want to modify an object.
 
-An example flow would be:
+Forms are a perfect use case. An example flow would be:
 
-- Retrieve a `user` object from a redux store
-- Modify the `user` object with a form built with Incision
-- When the user clicks save, dispatch an action containing the modified `user` object
+- Retrieve user data from a redux store
+- Modify the user data with a form containing inputs wrapped in `Incision.Operate` components
+- When the form is submitted, dispatch an action containing the modified `user` object
+
+No more need for `SET_NAME`, `SET_EMAIL`, etc. actions. The only one we cared about was `UPDATE_PROFILE` anyway. Of course, for simple forms `setState` is probably good enough! Incise was created for those situations where `setState` just doens't cut it.
 
 ## Installation
 
