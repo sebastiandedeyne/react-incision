@@ -5,8 +5,8 @@ import IncisionContext from "./IncisionContext";
 export default function Operate({ path, children }) {
   return (
     <IncisionContext.Consumer>
-      {({ values, update }) =>
-        children(get(values, path), newValue => update(newValue, path))
+      {({ state, update }) =>
+        children(get(state, path), newState => update(newState, path))
       }
     </IncisionContext.Consumer>
   );

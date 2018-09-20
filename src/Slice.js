@@ -5,10 +5,10 @@ import IncisionContext from "./IncisionContext";
 export default function Slice({ path, children }) {
   return (
     <IncisionContext.Consumer>
-      {({ values, update }) => (
+      {({ state, update }) => (
         <IncisionContext.Provider
           value={{
-            values: get(values, path),
+            state: get(state, path),
             update: (value, subPath = null) =>
               update(value, subPath ? `${path}.${subPath}` : path)
           }}

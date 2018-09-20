@@ -1,22 +1,51 @@
 {
   "name": "react-incision",
   "version": "0.0.1",
+  "description": "",
+  "main": "dist/react-incision.js",
+  "module": "dist/react-incision.esm.js",
   "license": "MIT",
   "authors": [
     "Sebastian De Deyne <sebastiandedeyne@gmail.com>"
   ],
   "scripts": {
-    "format": "prettier --write '**/*.js'"
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "prepublish": "npm run build",
+    "format": "prettier --write '**/*.js'",
+    "size-limit": "size-limit"
   },
   "dependencies": {
     "immer": "^1.7.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "jest": "^23.6.0",
     "prettier": "^1.14.3",
-    "react": "^16.5.2"
+    "react": "^16.5.2",
+    "rollup": "^0.66.1",
+    "rollup-plugin-babel": "^4.0.3",
+    "size-limit": "^0.20.0"
   },
   "peerDependencies": {
     "react": "^16.5.2"
-  }
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/test/setUp.js"
+  },
+  "size-limit": [
+    {
+      "limit": "1 KB",
+      "path": "dist/react-incision.js",
+      "ignore": [
+        "immer"
+      ]
+    }
+  ]
 }
